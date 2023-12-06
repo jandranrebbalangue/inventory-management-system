@@ -57,6 +57,9 @@ importers:
 
   packages/functions:
     devDependencies:
+      '@libsql/linux-x64-gnu':
+        specifier: 0.2.0-pre.4
+        version: 0.2.0-pre.4
       '@types/aws-lambda':
         specifier: ^8.10.130
         version: 8.10.130
@@ -2793,7 +2796,6 @@ packages:
     resolution: {integrity: sha512-OBiu0+tEVj2daJJrcg1uhEtHx7CsED8QesEqz8dhoK0Dad1oSn8XUpulhiMiXP1JFlcr7Zz37eKJdQxv17WTfw==}
     cpu: [x64]
     os: [linux]
-    requiresBuild: true
 
   /@libsql/linux-x64-musl@0.2.0-pre.4:
     resolution: {integrity: sha512-iJr3XiUTsB8ic4+DTG8412o9NZ3ifCEM+FaZ0/uxh3xlERbYUMUZhAIylxJqYjovld0edd6Nns7OJfu5b8Ae2g==}
