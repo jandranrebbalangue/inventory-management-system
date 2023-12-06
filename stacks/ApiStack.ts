@@ -13,7 +13,7 @@ export function ApiStack({ stack }: StackContext) {
       function: {
         bind: [
           secrets.DATABASE_URL,
-          secrets.DATABASE_URL,
+          secrets.DATABASE_AUTH_TOKEN,
           secrets.GOOGLE_CLIENT_ID,
           secrets.GOOGLE_CLIENT_SECRET,
         ],
