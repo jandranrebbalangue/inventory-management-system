@@ -1,5 +1,5 @@
 import { drizzle } from "drizzle-orm/libsql";
-import { createClient } from "@libsql/client/.";
+import { createClient } from "@libsql/client";
 import { Config } from "sst/node/config";
 import * as schema from "./schema";
 
