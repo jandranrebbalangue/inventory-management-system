@@ -1,6 +1,6 @@
-import { StackContext, Api, EventBus, StaticSite, use } from "sst/constructs";
+import { StackContext, Api, EventBus } from "sst/constructs";
 
-export function API({ stack }: StackContext) {
+export function ApiStack({ stack }: StackContext) {
   const bus = new EventBus(stack, "bus", {
     defaults: {
       retries: 10,
@@ -28,19 +28,4 @@ export function API({ stack }: StackContext) {
     ApiEndpoint: api.url,
   });
   return api;
-}
-
-export function Web({ stack }: StackContext) {
-  const api = use(API);
-  const web = new StaticSite(stack, "web", {
-    path: "packages/web",
-    buildOutput: "dist",
-    buildCommand: "pnpm run build",
-    environment: {
-      VITE_APP_API_URL: api.url,
-    },
-  });
-  stack.addOutputs({
-    Web: web.url,
-  });
 }
