@@ -19,6 +19,12 @@ export function ApiStack({ stack }: StackContext) {
         ],
       },
     },
+    cors: {
+      allowCredentials: true,
+      allowHeaders: ["content-type"],
+      allowMethods: ["ANY"],
+      allowOrigins: ["http://localhost:5173"],
+    },
     routes: {
       "GET /": "packages/functions/src/lambda.handler",
     },
