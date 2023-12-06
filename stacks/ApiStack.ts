@@ -1,16 +1,22 @@
-import { StackContext, Api, EventBus } from "sst/constructs";
+import { StackContext, Api, Config } from "sst/constructs";
 
 export function ApiStack({ stack }: StackContext) {
-  const bus = new EventBus(stack, "bus", {
-    defaults: {
-      retries: 10,
-    },
-  });
-
+  const secrets = Config.Secret.create(
+    stack,
+    "DATABASE_URL",
+    "DATABASE_AUTH_TOKEN",
+    "GOOGLE_CLIENT_ID",
+    "GOOGLE_CLIENT_SECRET",
+  );
   const api = new Api(stack, "api", {
     defaults: {
       function: {
-        bind: [bus],
+        bind: [
+          secrets.DATABASE_URL,
+          secrets.DATABASE_URL,
+          secrets.GOOGLE_CLIENT_ID,
+          secrets.GOOGLE_CLIENT_SECRET,
+        ],
       },
     },
     routes: {
@@ -20,12 +26,9 @@ export function ApiStack({ stack }: StackContext) {
     },
   });
 
-  bus.subscribe("todo.created", {
-    handler: "packages/functions/src/events/todo-created.handler",
-  });
-
   stack.addOutputs({
     ApiEndpoint: api.url,
   });
-  return api;
+
+  return { api };
 }

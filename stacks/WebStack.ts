@@ -2,7 +2,7 @@ import { StackContext, StaticSite, use } from "sst/constructs";
 import { ApiStack } from "./ApiStack";
 
 export function WebStack({ stack }: StackContext) {
-  const api = use(ApiStack);
+  const { api } = use(ApiStack);
   const web = new StaticSite(stack, "web", {
     path: "packages/web",
     buildOutput: "dist",
@@ -14,4 +14,5 @@ export function WebStack({ stack }: StackContext) {
   stack.addOutputs({
     Web: web.url,
   });
+  return { web };
 }
