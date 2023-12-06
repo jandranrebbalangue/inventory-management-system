@@ -10,7 +10,7 @@ export const users = sqliteTable("users", {
     mode: "timestamp",
   })
     .notNull()
-    .default(sql`(strftime('%s','now))`),
+    .default(sql`(strftime('%s','now'))`),
   updatedAt: integer("updated_at", {
     mode: "timestamp",
   }),

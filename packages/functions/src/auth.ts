@@ -1,4 +1,9 @@
-import { AuthHandler, GoogleAdapter, Session } from "sst/node/auth";
+import {
+  AuthHandler,
+  GoogleAdapter,
+  LinkAdapter,
+  Session,
+} from "sst/node/auth";
 import { Config } from "sst/node/config";
 import { StaticSite } from "sst/node/site";
 import {
@@ -24,18 +29,15 @@ export const handler = AuthHandler({
         const redirect = process.env.IS_LOCAL
           ? "http://localhost:5173"
           : StaticSite.web.url;
-        const firstName = claims.name as string;
-        const middleName = claims.middle_name as string;
-        const lastName = claims.family_name as string;
-
+        const name = claims.name as string;
         const user = await findUserByEmail(claims.email as string);
         if (!user) {
           const userId = await createUser({
-            name: `${firstName} ${middleName} ${lastName}`,
+            name,
             email: claims.email as string,
             avatar_url: claims.picture as string,
           });
-
+          console.log({ userId });
           return Session.parameter({
             redirect,
             type: "user",
@@ -52,6 +54,28 @@ export const handler = AuthHandler({
             userId: user.id.toString(),
           },
         });
+      },
+    }),
+    link: LinkAdapter({
+      onLink: async (link) => {
+        return {
+          statusCode: 200,
+          body: link,
+        };
+      },
+      onSuccess: async (claims) => {
+        return {
+          statusCode: 200,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify(claims),
+        };
+      },
+      onError: async () => {
+        return {
+          statusCode: 200,
+        };
       },
     }),
   },
