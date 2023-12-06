@@ -7,6 +7,7 @@
     "typecheck": "tsc -noEmit"
   },
   "devDependencies": {
+    "@libsql/linux-x64-gnu": "0.2.0-pre.4",
     "@types/node": "^20.10.3",
     "drizzle-kit": "^0.20.6",
     "sst": "^2.36.8",

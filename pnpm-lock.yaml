@@ -39,6 +39,9 @@ importers:
         specifier: ^3.22.4
         version: 3.22.4
     devDependencies:
+      '@libsql/linux-x64-gnu':
+        specifier: 0.2.0-pre.4
+        version: 0.2.0-pre.4
       '@types/node':
         specifier: ^20.10.3
         version: 20.10.3
@@ -2791,8 +2794,6 @@ packages:
     cpu: [x64]
     os: [linux]
     requiresBuild: true
-    dev: false
-    optional: true
 
   /@libsql/linux-x64-musl@0.2.0-pre.4:
     resolution: {integrity: sha512-iJr3XiUTsB8ic4+DTG8412o9NZ3ifCEM+FaZ0/uxh3xlERbYUMUZhAIylxJqYjovld0edd6Nns7OJfu5b8Ae2g==}
