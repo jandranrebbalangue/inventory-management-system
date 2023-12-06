@@ -37,7 +37,6 @@ export const handler = AuthHandler({
             email: claims.email as string,
             avatar_url: claims.picture as string,
           });
-          console.log({ userId });
           return Session.parameter({
             redirect,
             type: "user",
