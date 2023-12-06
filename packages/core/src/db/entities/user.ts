@@ -4,10 +4,13 @@ import { users } from "../schema/users";
 import { db } from "../access";
 
 const insertUserSchema = createInsertSchema(users);
+
 const findUserByIdSchema = z
   .union([z.string(), z.number()])
   .pipe(z.coerce.number());
+
 const findUserByEmailSchema = z.string();
+
 export const findUserById = z
   .function()
   .args(findUserByIdSchema)
