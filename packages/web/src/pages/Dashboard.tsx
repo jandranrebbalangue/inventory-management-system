@@ -8,7 +8,7 @@ const Dashboard = () => {
   const [searchParams, setSearchParams] = useSearchParams();
   useEffect(() => {
     if (searchParams.has("token")) {
-      const token: string = searchParams.get("token") as string;
+      const token = searchParams.get("token") as string;
       login(token);
     }
     setSearchParams({});
