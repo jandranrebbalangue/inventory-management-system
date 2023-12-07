@@ -1,8 +1,8 @@
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
+import { ClipLoader } from "react-spinners";
 import routes from "./routes";
 import NotFound from "./NotFound";
-import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
-import { ClipLoader } from "react-spinners";
 import { AuthProvider } from "./context/authProvider";
 
 function App() {
