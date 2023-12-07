@@ -3,6 +3,7 @@ import NotFound from "./NotFound";
 import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
 import { ClipLoader } from "react-spinners";
+import { AuthProvider } from "./context/authProvider";
 
 function App() {
   const routerPaths = routes.map((item) => {
@@ -14,6 +15,10 @@ function App() {
   });
   const router = createBrowserRouter(routerPaths);
 
-  return <RouterProvider router={router} fallbackElement={<ClipLoader />} />;
+  return (
+    <AuthProvider>
+      <RouterProvider router={router} fallbackElement={<ClipLoader />} />
+    </AuthProvider>
+  );
 }
 export default App;

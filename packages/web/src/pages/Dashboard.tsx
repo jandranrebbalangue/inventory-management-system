@@ -1,15 +1,18 @@
 import { useEffect } from "react";
 import { useSearchParams } from "react-router-dom";
 import "../App.css";
+import { useAuth } from "../context/auth";
 
 const Dashboard = () => {
+  const { login } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
   useEffect(() => {
     if (searchParams.has("token")) {
-      localStorage.setItem("API_TOKEN", searchParams.get("token") as string);
+      const token: string = searchParams.get("token") as string;
+      login(token);
     }
     setSearchParams({});
-  }, [searchParams, setSearchParams]);
+  }, [login, searchParams, setSearchParams]);
   return <div>Dashboard</div>;
 };
 
