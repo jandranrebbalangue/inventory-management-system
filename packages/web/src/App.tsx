@@ -1,23 +1,19 @@
-import { useState } from "react";
+import routes from "./routes";
+import NotFound from "./NotFound";
+import { RouterProvider, createBrowserRouter } from "react-router-dom";
 import "./App.css";
+import { ClipLoader } from "react-spinners";
 
 function App() {
-  const [message, setMessage] = useState("Hi 👋");
+  const routerPaths = routes.map((item) => {
+    return {
+      path: item.path,
+      element: <item.element />,
+      errorElement: <NotFound />,
+    };
+  });
+  const router = createBrowserRouter(routerPaths);
 
-  function onClick() {
-    fetch(import.meta.env.VITE_APP_API_URL)
-      .then((response) => response.text())
-      .then(setMessage);
-  }
-
-  return (
-    <div className="App">
-      <div className="card">
-        <button onClick={onClick}>
-          Message is "<i>{message}</i>"
-        </button>
-      </div>
-    </div>
-  );
+  return <RouterProvider router={router} fallbackElement={<ClipLoader />} />;
 }
 export default App;
