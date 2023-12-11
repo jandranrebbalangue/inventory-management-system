@@ -73,7 +73,7 @@ export const handler = AuthHandler({
       },
       onError: async () => {
         return {
-          statusCode: 200,
+          statusCode: 500,
         };
       },
     }),
