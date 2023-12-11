@@ -2,6 +2,9 @@ import { useEffect } from "react";
 import { Navigate, useSearchParams } from "react-router-dom";
 import "../App.css";
 import { useAuth } from "../context/auth";
+import { DataTable } from "@/products/data-table";
+import { columns } from "@/products/columns";
+import { products } from "@/products/product";
 
 const Dashboard = () => {
   const { login, token } = useAuth();
@@ -16,8 +19,8 @@ const Dashboard = () => {
   }, [login, searchParams, setSearchParams]);
 
   return (
-    <div>
-      Dashboard
+    <div className="container mx-auto py-10">
+      <DataTable columns={columns} data={products} />
       {!token && <Navigate to="/login" replace={true} />}
     </div>
   );
