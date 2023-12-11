@@ -5,25 +5,25 @@ import { db } from "../access";
 
 const insertProductSchema = createInsertSchema(products);
 
-const findProductByIdSchema = z.string();
+const findProductByCodeSchema = z.string();
 
 const findProductByNameSchema = z.string();
-
-export const findProductById = z
-  .function()
-  .args(findProductByIdSchema)
-  .implement(async (productId) => {
-    await db.query.products.findFirst({
-      where: (products, { eq }) => eq(products.productCode, productId),
-    });
-  });
 
 export const findProductByName = z
   .function()
   .args(findProductByNameSchema)
   .implement(async (productName) => {
+    await db.query.products.findFirst({
+      where: (products, { eq }) => eq(products.productName, productName),
+    });
+  });
+
+export const findProductByCode = z
+  .function()
+  .args(findProductByCodeSchema)
+  .implement(async (productCode) => {
     const product = await db.query.products.findFirst({
-      where: (products, { eq }) => eq(products.name, productName),
+      where: (products, { eq }) => eq(products.productCode, productCode),
     });
     return product;
   });
@@ -35,6 +35,6 @@ export const createProduct = z
     const product = await db
       .insert(products)
       .values(newProduct)
-      .returning({ id: products.productCode });
-    return product[0].id;
+      .returning({ productCode: products.productCode });
+    return product[0].productCode;
   });
