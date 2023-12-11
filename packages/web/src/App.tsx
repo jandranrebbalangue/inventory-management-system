@@ -4,6 +4,7 @@ import routes from "./routes";
 import NotFound from "./NotFound";
 import "./App.css";
 import { AuthProvider } from "./context/authProvider";
+import { ThemeProvider } from "./components/theme-provider";
 
 function App() {
   const routerPaths = routes.map((item) => {
@@ -16,9 +17,11 @@ function App() {
   const router = createBrowserRouter(routerPaths);
 
   return (
-    <AuthProvider>
-      <RouterProvider router={router} fallbackElement={<ClipLoader />} />
-    </AuthProvider>
+    <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
+      <AuthProvider>
+        <RouterProvider router={router} fallbackElement={<ClipLoader />} />
+      </AuthProvider>
+    </ThemeProvider>
   );
 }
 export default App;

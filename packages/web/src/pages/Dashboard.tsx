@@ -5,6 +5,7 @@ import { useAuth } from "../context/auth";
 import { DataTable } from "@/products/data-table";
 import { columns } from "@/products/columns";
 import { products } from "@/products/product";
+import { ModeToggle } from "@/components/mode-toggle";
 
 const Dashboard = () => {
   const { login, token } = useAuth();
@@ -20,6 +21,9 @@ const Dashboard = () => {
 
   return (
     <div className="container mx-auto py-10">
+      <div className="flex items-center justify-end space-x-2 py-4">
+        <ModeToggle />
+      </div>
       <DataTable columns={columns} data={products} />
       {!token && <Navigate to="/login" replace={true} />}
     </div>
