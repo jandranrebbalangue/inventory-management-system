@@ -30,6 +30,7 @@ export function ApiStack({ stack }: StackContext) {
       "POST /products": "packages/functions/src/product/create.handler",
       "GET /products": "packages/functions/src/product/list.handler",
       "DELETE /products/{id}": "packages/functions/src/product/delete.handler",
+      "GET /products/{id}": "packages/functions/src/product/read.handler",
     },
   });
 

@@ -12,6 +12,8 @@ const findProductByCodeSchema = z.string();
 
 const findProductByNameSchema = z.string();
 
+const findProductByIdSchema = z.number();
+
 export const findProductByName = z
   .function()
   .args(findProductByNameSchema)
@@ -27,6 +29,16 @@ export const findProductByCode = z
   .implement(async (productCode) => {
     const product = await db.query.products.findFirst({
       where: (products, { eq }) => eq(products.productCode, productCode),
+    });
+    return product;
+  });
+
+export const findProductById = z
+  .function()
+  .args(findProductByIdSchema)
+  .implement(async (productId) => {
+    const product = await db.query.products.findFirst({
+      where: (products, { eq }) => eq(products.id, productId),
     });
     return product;
   });
