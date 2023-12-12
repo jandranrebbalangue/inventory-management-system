@@ -2,8 +2,11 @@ import { createInsertSchema } from "drizzle-zod";
 import { z } from "zod";
 import { products } from "../schema/product";
 import { db } from "../access";
+import { eq } from "drizzle-orm";
 
 const insertProductSchema = createInsertSchema(products);
+
+const deleteProductByIdSchema = z.number();
 
 const findProductByCodeSchema = z.string();
 
@@ -45,4 +48,11 @@ export const listProducts = z
   .implement(async () => {
     const result = await db.select().from(products);
     return result;
+  });
+
+export const deleteProduct = z
+  .function()
+  .args(deleteProductByIdSchema)
+  .implement(async (productId) => {
+    await db.delete(products).where(eq(products.id, productId));
   });

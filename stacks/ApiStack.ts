@@ -27,8 +27,9 @@ export function ApiStack({ stack }: StackContext) {
     },
     routes: {
       "GET /": "packages/functions/src/lambda.handler",
-      "POST /product": "packages/functions/src/product/create.handler",
+      "POST /products": "packages/functions/src/product/create.handler",
       "GET /products": "packages/functions/src/product/list.handler",
+      "DELETE /products/{id}": "packages/functions/src/product/delete.handler",
     },
   });
 
