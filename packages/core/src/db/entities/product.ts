@@ -39,7 +39,7 @@ export const createProduct = z
     return product[0].productCode;
   });
 
-export const listProduct = z
+export const listProducts = z
   .function()
   .args()
   .implement(async () => {
