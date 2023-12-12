@@ -31,6 +31,7 @@ export function ApiStack({ stack }: StackContext) {
       "GET /products": "packages/functions/src/product/list.handler",
       "DELETE /products/{id}": "packages/functions/src/product/delete.handler",
       "GET /products/{id}": "packages/functions/src/product/read.handler",
+      "PUT /products/{id}": "packages/functions/src/product/update.handler",
     },
   });
 

@@ -14,6 +14,13 @@ const findProductByNameSchema = z.string();
 
 const findProductByIdSchema = z.number();
 
+const updateProductByIdSchema = z.object({
+  productId: z.number(),
+  productName: z.string(),
+  productCode: z.string(),
+  quantity: z.number(),
+});
+
 export const findProductByName = z
   .function()
   .args(findProductByNameSchema)
@@ -67,4 +74,14 @@ export const deleteProduct = z
   .args(deleteProductByIdSchema)
   .implement(async (productId) => {
     await db.delete(products).where(eq(products.id, productId));
+  });
+
+export const updateProduct = z
+  .function()
+  .args(updateProductByIdSchema)
+  .implement(async ({ productName, productId, productCode, quantity }) => {
+    await db
+      .update(products)
+      .set({ productName, productCode, quantity })
+      .where(eq(products.id, productId));
   });
