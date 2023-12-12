@@ -38,3 +38,11 @@ export const createProduct = z
       .returning({ productCode: products.productCode });
     return product[0].productCode;
   });
+
+export const listProduct = z
+  .function()
+  .args()
+  .implement(async () => {
+    const result = await db.select().from(products);
+    return result;
+  });
