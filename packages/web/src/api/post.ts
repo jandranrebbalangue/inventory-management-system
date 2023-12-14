@@ -7,7 +7,7 @@ const post = async ({
 }: {
   apiName: string;
   path?: string;
-  data: Record<string, string>;
+  data: Record<string, string | number>;
 }) => {
   try {
     const myHeaders = new Headers();

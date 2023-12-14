@@ -8,6 +8,7 @@ import { ModeToggle } from "@/components/mode-toggle";
 import { Product } from "@/products/product";
 import Modal from "@/components/Dialog";
 import get from "@/api/get";
+import { Toaster } from "@/components/ui/toaster";
 
 const Dashboard = () => {
   const { login, token } = useAuth();
@@ -50,6 +51,7 @@ const Dashboard = () => {
       <div className="flex items-center justify-end space-x-2 py-4">
         <ModeToggle />
         <Modal label="Add Product" />
+        <Toaster />
       </div>
       <DataTable columns={columns} data={products} />
       {!token && <Navigate to="/login" replace={true} />}
