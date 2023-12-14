@@ -21,7 +21,7 @@ export function ApiStack({ stack }: StackContext) {
     },
     cors: {
       allowCredentials: true,
-      allowHeaders: ["content-type"],
+      allowHeaders: ["*"],
       allowMethods: ["ANY"],
       allowOrigins: ["http://localhost:5173"],
     },
