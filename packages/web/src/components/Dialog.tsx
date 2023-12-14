@@ -1,6 +1,7 @@
 import * as z from "zod";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
+import { mutate } from "swr";
 import { Button } from "@/components/ui/button";
 import {
   Form,
@@ -21,7 +22,6 @@ import {
 } from "@/components/ui/dialog";
 import post from "@/api/post";
 import { useToast } from "./ui/use-toast";
-import { Product } from "@/products/product";
 
 const Modal = ({ label }: { label: string }) => {
   const { toast } = useToast();
@@ -42,14 +42,20 @@ const Modal = ({ label }: { label: string }) => {
   });
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
-    const result = (await post({
+    const product = (await post({
       apiName: "/products",
       data,
-    })) as Product;
-    if (result)
+    })) as string | number;
+    if (typeof product === "number") {
       toast({
         description: "Add Product successfully",
       });
+      mutate("/products");
+    } else {
+      toast({
+        description: product,
+      });
+    }
   };
 
   return (

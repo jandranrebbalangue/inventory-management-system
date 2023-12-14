@@ -57,8 +57,8 @@ export const createProduct = z
     const product = await db
       .insert(products)
       .values(newProduct)
-      .returning({ productCode: products.productCode });
-    return product[0].productCode;
+      .returning({ id: products.id });
+    return product[0].id;
   });
 
 export const listProducts = z

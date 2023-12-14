@@ -22,7 +22,7 @@ export const handler = ApiHandler(async (event) => {
   if (productExist) {
     return {
       statusCode: 409,
-      body: "Product already exist",
+      body: JSON.stringify("Product already exist", null, 2),
     };
   } else {
     const data = {
@@ -30,11 +30,11 @@ export const handler = ApiHandler(async (event) => {
       productCode,
       quantity,
     };
-    await createProduct(data);
+    const product = await createProduct(data);
 
     return {
       statusCode: 200,
-      body: JSON.stringify(data),
+      body: JSON.stringify(product),
     };
   }
 });
