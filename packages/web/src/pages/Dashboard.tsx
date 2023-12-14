@@ -6,8 +6,8 @@ import { DataTable } from "@/products/data-table";
 import { columns } from "@/products/columns";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Product } from "@/products/product";
-import { API_TOKEN } from "@/constants";
 import Modal from "@/components/Dialog";
+import get from "@/api/get";
 
 const Dashboard = () => {
   const { login, token } = useAuth();
@@ -35,16 +35,9 @@ const Dashboard = () => {
   useEffect(() => {
     let cancel = false;
     const getProducts = async () => {
-      const token = localStorage.getItem(API_TOKEN);
-      const res = await fetch(`${import.meta.env.VITE_API_ENDPOINT}/products`, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-          "Content-Type": "application/json",
-        },
-      });
-      const productss = await res.json();
+      const products = (await get({ apiName: "/products" })) as Product[];
       if (cancel) return;
-      setProducts(productss);
+      setProducts(products);
     };
     getProducts();
     return () => {
