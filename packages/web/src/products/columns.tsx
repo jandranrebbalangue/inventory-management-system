@@ -8,7 +8,11 @@ import { Product } from "./product";
 
 export const columns: ColumnDef<Product>[] = [
   {
-    accessorKey: "productId",
+    accessorKey: "id",
+    header: "Id",
+  },
+  {
+    accessorKey: "productCode",
     header: "Product Code",
   },
   {
