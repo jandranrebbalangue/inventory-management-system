@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import { Navigate, useSearchParams } from "react-router-dom";
+import useSWR from "swr";
 import "../App.css";
 import { useAuth } from "../context/auth";
 import { DataTable } from "@/products/data-table";
@@ -7,22 +8,14 @@ import { columns } from "@/products/columns";
 import { ModeToggle } from "@/components/mode-toggle";
 import { Product } from "@/products/product";
 import Modal from "@/components/Dialog";
-import get from "@/api/get";
 import { Toaster } from "@/components/ui/toaster";
+import { fetcher } from "@/utils/fetcher";
+import { ClipLoader } from "react-spinners";
 
 const Dashboard = () => {
   const { login, token } = useAuth();
   const [searchParams, setSearchParams] = useSearchParams();
-  const [products, setProducts] = useState<Product[]>(() => {
-    return [
-      {
-        id: 0,
-        productName: "",
-        productCode: "",
-        quantity: 0,
-      },
-    ];
-  });
+  const { data, isLoading } = useSWR<Product[]>("/products", fetcher);
 
   useEffect(() => {
     const tokenExist = searchParams.has("token");
@@ -33,18 +26,7 @@ const Dashboard = () => {
     setSearchParams({});
   }, [login, searchParams, setSearchParams]);
 
-  useEffect(() => {
-    let cancel = false;
-    const getProducts = async () => {
-      const products = (await get({ apiName: "/products" })) as Product[];
-      if (cancel) return;
-      setProducts(products);
-    };
-    getProducts();
-    return () => {
-      cancel = true;
-    };
-  }, []);
+  if (isLoading) return <ClipLoader />;
 
   return (
     <div className="container mx-auto py-10">
@@ -53,7 +35,7 @@ const Dashboard = () => {
         <Modal label="Add Product" />
         <Toaster />
       </div>
-      <DataTable columns={columns} data={products} />
+      <DataTable columns={columns} data={data as Product[]} />
       {!token && <Navigate to="/login" replace={true} />}
     </div>
   );
