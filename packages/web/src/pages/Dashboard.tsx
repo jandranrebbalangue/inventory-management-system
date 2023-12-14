@@ -44,7 +44,6 @@ const Dashboard = () => {
         },
       });
       const productss = await res.json();
-      console.log({ productss });
       if (cancel) return;
       setProducts(productss);
     };
