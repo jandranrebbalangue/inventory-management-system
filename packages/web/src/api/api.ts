@@ -4,7 +4,7 @@ import { InsertProduct } from "../../../core/src/db/schema/product";
 import { API_TOKEN } from "@/constants";
 
 const token = localStorage.getItem(API_TOKEN);
-const externalApi = wretch(import.meta.env.VITE_APP_API_URL).auth(
+const externalApi = wretch(import.meta.env.VITE_API_ENDPOINT).auth(
   `Bearer ${token}`,
 );
 export const insertProduct = async (newProduct: InsertProduct) => {
