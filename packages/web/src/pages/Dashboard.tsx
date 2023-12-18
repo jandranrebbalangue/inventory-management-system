@@ -22,8 +22,6 @@ const Dashboard = () => {
     ([url, token]) => fetcher(url, token),
   );
 
-  console.log({ isLoading });
-
   if (isLoading) return <ClipLoader />;
 
   return (
