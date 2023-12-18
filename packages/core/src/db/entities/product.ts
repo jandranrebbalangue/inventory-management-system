@@ -82,6 +82,6 @@ export const updateProduct = z
   .implement(async ({ productName, productId, productCode, quantity }) => {
     await db
       .update(products)
-      .set({ productName, productCode, quantity })
+      .set({ productName, productCode, quantity, updatedAt: new Date() })
       .where(eq(products.id, productId));
   });
