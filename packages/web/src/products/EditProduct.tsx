@@ -75,7 +75,6 @@ const EditProduct = () => {
                 <FormControl>
                   <Input placeholder="product code" {...field} />
                 </FormControl>
-                <FormDescription>This is your product code</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -90,7 +89,6 @@ const EditProduct = () => {
                 <FormControl>
                   <Input placeholder="product name" {...field} />
                 </FormControl>
-                <FormDescription>This is your product name</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
@@ -105,7 +103,6 @@ const EditProduct = () => {
                 <FormControl>
                   <Input placeholder="quantity" {...field} type="number" />
                 </FormControl>
-                <FormDescription>This is your quantity</FormDescription>
                 <FormMessage />
               </FormItem>
             )}
