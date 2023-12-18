@@ -1,4 +1,4 @@
-import { ApiHandler } from "sst/node/api";
+import { ApiHandler, useJsonBody, usePathParam } from "sst/node/api";
 import { useSession } from "sst/node/auth";
 import { updateProduct } from "@inventory-management-system/core/db/entities/product";
 
@@ -8,18 +8,11 @@ type Product = {
   quantity: number;
 };
 
-type ProductUpdateParams = {
-  id: string;
-};
-
-export const handler = ApiHandler(async (event) => {
+export const handler = ApiHandler(async (_event) => {
   const session = useSession();
   if (session.type !== "user") throw new Error("Not authenticated");
-  const productData = JSON.parse(event.body as string) as Product;
-  const { productCode, productName, quantity } = productData;
-
-  const params = event.pathParameters;
-  const { id } = params as ProductUpdateParams;
+  const { productName, productCode, quantity } = useJsonBody() as Product;
+  const id = usePathParam("id") as string;
   const productId = parseInt(id, 10);
   await updateProduct({
     productId,

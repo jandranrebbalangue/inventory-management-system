@@ -1,4 +1,4 @@
-import { ApiHandler } from "sst/node/api";
+import { ApiHandler, useJsonBody } from "sst/node/api";
 import { useSession } from "sst/node/auth";
 import {
   createProduct,
@@ -11,12 +11,11 @@ type Product = {
   quantity: number;
 };
 
-export const handler = ApiHandler(async (event) => {
+export const handler = ApiHandler(async (_event) => {
   const session = useSession();
   if (session.type !== "user") throw new Error("Not authenticated");
-  const productData = JSON.parse(event.body as string) as Product;
-  const { productCode, productName, quantity } = productData;
 
+  const { productCode, productName, quantity } = useJsonBody() as Product;
   const productExist = await findProductByCode(productCode);
 
   if (productExist) {
