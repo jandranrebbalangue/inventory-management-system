@@ -12,6 +12,7 @@ import { deleteProduct } from "@/api/api";
 import { mutate } from "swr";
 import { Button } from "@/components/ui/button";
 import { useToast } from "@/components/ui/use-toast";
+import { Link } from "react-router-dom";
 
 const DeleteProduct = ({ productId }: { productId: string }) => {
   const { toast } = useToast();
@@ -25,14 +26,14 @@ const DeleteProduct = ({ productId }: { productId: string }) => {
     <>
       <Dialog>
         <DialogTrigger asChild>
-          <Button variant="outline">Delete Product</Button>
+          <Link to={``}>Delete</Link>
         </DialogTrigger>
         <DialogContent>
           <DialogHeader>
-            <DialogTitle>Are you sure absolutely sure?</DialogTitle>
+            <DialogTitle>Delete Product</DialogTitle>
             <DialogDescription>
               This action cannot be undone. This will permanently delete your
-              product
+              product. Are you sure?
             </DialogDescription>
           </DialogHeader>
           <DialogFooter className="sm:justify-start">

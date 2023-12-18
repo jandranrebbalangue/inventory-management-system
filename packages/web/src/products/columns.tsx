@@ -33,7 +33,7 @@ export const columns: ColumnDef<Product>[] = [
       return (
         <div className="flex">
           <div className="mr-2">
-            <Link to={`/products/${product.id}/edit`}>Edit Product</Link>
+            <Link to={`/products/${product.id}/edit`}>Edit</Link>
           </div>
           <DeleteProduct productId={`${product.id}`} />
         </div>
