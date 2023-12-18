@@ -43,3 +43,9 @@ export const getProduct = async (productId: string) => {
     .json(schema.safeParse);
   return product;
 };
+
+export const deleteProduct = async (productId: string) =>
+  externalApi
+    .url(`/products/${productId}`)
+    .delete()
+    .res(() => true);

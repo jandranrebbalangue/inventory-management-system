@@ -15,6 +15,7 @@ import {
 import { Input } from "@/components/ui/input";
 import {
   Dialog,
+  DialogClose,
   DialogContent,
   DialogHeader,
   DialogTitle,
@@ -110,7 +111,9 @@ const AddProduct = ({ label }: { label: string }) => {
                 </FormItem>
               )}
             />
-            <Button type="submit">Submit</Button>
+            <DialogClose asChild>
+              <Button type="submit">Submit</Button>
+            </DialogClose>
           </form>
         </Form>
       </DialogContent>
