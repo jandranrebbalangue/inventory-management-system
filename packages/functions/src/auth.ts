@@ -27,7 +27,7 @@ export const handler = AuthHandler({
       onSuccess: async (tokenset) => {
         const claims = tokenset.claims();
         const redirect = process.env.IS_LOCAL
-          ? "http://localhost:5173"
+          ? "http://localhost:5173/oauth/google"
           : StaticSite.web.url;
         const name = claims.name as string;
         const user = await findUserByEmail(claims.email as string);

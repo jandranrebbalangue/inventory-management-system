@@ -1,15 +1,13 @@
-import { Navigate } from "react-router-dom";
-import { useAuth } from "../../context/auth";
+import { Button } from "@/components/ui/button";
 
 const Login = () => {
-  const { token } = useAuth();
   return (
     <>
-      <a href={`${import.meta.env.VITE_API_ENDPOINT}/auth/google/authorize`}>
-        <button>Login with Google</button>
-      </a>
-
-      {token && <Navigate to="/" replace={true} />}
+      <Button>
+        <a href={`${import.meta.env.VITE_API_ENDPOINT}/auth/google/authorize`}>
+          Login with Google
+        </a>
+      </Button>
     </>
   );
 };

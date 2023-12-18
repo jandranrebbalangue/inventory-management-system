@@ -1,8 +1,5 @@
-import { useEffect } from "react";
-import { Navigate, useSearchParams } from "react-router-dom";
 import useSWR from "swr";
 import "../App.css";
-import { useAuth } from "../context/auth";
 import { DataTable } from "@/products/data-table";
 import { columns } from "@/products/columns";
 import { ModeToggle } from "@/components/mode-toggle";
@@ -11,20 +8,21 @@ import AddProduct from "@/products/AddProduct";
 import { Toaster } from "@/components/ui/toaster";
 import { fetcher } from "@/utils/fetcher";
 import { ClipLoader } from "react-spinners";
+import { useLoaderData } from "react-router-dom";
+import { User } from "../../../core/src/db/schema/users";
+
+interface getToken {
+  token: User;
+}
 
 const Dashboard = () => {
-  const { login, token } = useAuth();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const { data, isLoading } = useSWR<Product[]>("/products", fetcher);
+  const { token } = useLoaderData() as getToken;
+  const { data, isLoading } = useSWR<Product[]>(
+    ["/products", token],
+    ([url, token]) => fetcher(url, token),
+  );
 
-  useEffect(() => {
-    const tokenExist = searchParams.has("token");
-    if (tokenExist) {
-      const token = searchParams.get("token") as string;
-      login(token);
-    }
-    setSearchParams({});
-  }, [login, searchParams, setSearchParams]);
+  console.log({ isLoading });
 
   if (isLoading) return <ClipLoader />;
 
@@ -36,7 +34,7 @@ const Dashboard = () => {
         <Toaster />
       </div>
       <DataTable columns={columns} data={data as Product[]} />
-      {!token && <Navigate to="/login" replace={true} />}
+      {/* {!token && <Navigate to="/login" replace={true} />} */}
     </div>
   );
 };

@@ -1,12 +1,16 @@
 import axios from "axios";
-import { API_TOKEN } from "@/constants";
 
-const token = localStorage.getItem(API_TOKEN);
-export const fetcher = <T>(endpoint: string): Promise<T> =>
-  axios
-    .get(`${import.meta.env.VITE_API_ENDPOINT}${endpoint}`, {
+export const fetcher = async <T>(
+  endpoint: string,
+  token: string,
+): Promise<T> => {
+  const res = await axios.get(
+    `${import.meta.env.VITE_API_ENDPOINT}${endpoint}`,
+    {
       headers: {
         Authorization: `Bearer ${token}`,
       },
-    })
-    .then((res) => res.data);
+    },
+  );
+  return res.data;
+};
