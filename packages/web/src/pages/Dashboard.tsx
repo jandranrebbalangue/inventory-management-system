@@ -19,7 +19,7 @@ const Dashboard = () => {
   const { token } = useLoaderData() as getToken;
   const { data, isLoading } = useSWR<Product[]>(
     ["/products", token],
-    ([url, token]) => fetcher(url, token),
+    ([endpoint, authToken]) => fetcher(endpoint, authToken),
   );
 
   if (isLoading) return <ClipLoader />;
@@ -32,7 +32,6 @@ const Dashboard = () => {
         <Toaster />
       </div>
       <DataTable columns={columns} data={data as Product[]} />
-      {/* {!token && <Navigate to="/login" replace={true} />} */}
     </div>
   );
 };
