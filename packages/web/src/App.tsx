@@ -11,6 +11,7 @@ import { ThemeProvider } from "./components/theme-provider";
 import Dashboard from "./pages/Dashboard";
 import { API_TOKEN } from "./constants";
 import Login from "./pages/Login";
+import EditProduct from "./products/EditProduct";
 
 function App() {
   const routerPaths = [
@@ -25,6 +26,10 @@ function App() {
         }
         return redirect("/signin");
       },
+    },
+    {
+      path: "products/:productId/edit",
+      element: <EditProduct />,
     },
     {
       path: "/oauth/google",

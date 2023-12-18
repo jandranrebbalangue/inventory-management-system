@@ -20,3 +20,8 @@ export const insertProduct = async (newProduct: InsertProduct) => {
 
   return product;
 };
+
+export const updateProduct = async (
+  productId: string,
+  updateWith: { productCode: string; productName: string; quantity: number },
+) => externalApi.url(`/products/${productId}`).json(updateWith).put();

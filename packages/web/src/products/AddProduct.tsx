@@ -43,14 +43,14 @@ const AddProduct = ({ label }: { label: string }) => {
 
   const onSubmit = async (data: z.infer<typeof formSchema>) => {
     const product = await insertProduct(data);
-    if (product) {
+    if (product.success) {
       toast({
         description: "Add Product successfully",
       });
       mutate("/products");
     } else {
       toast({
-        description: product,
+        description: product.error.message,
       });
     }
   };
