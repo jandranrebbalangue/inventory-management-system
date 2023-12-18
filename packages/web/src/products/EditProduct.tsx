@@ -61,16 +61,18 @@ const EditProduct = () => {
   };
 
   return (
-    <div>
-      <Button onClick={() => navigate("/")}>Back</Button>
+    <>
+      <div className="flex justify-start,">
+        <Button onClick={() => navigate("/")}>Back</Button>
+      </div>
       <Form {...form}>
         <form onSubmit={form.handleSubmit(onSubmit)} className="space-y-8">
           <FormField
             control={form.control}
             name="productCode"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Product Code</FormLabel>
+              <FormItem className="flex items-center">
+                <FormLabel className="pt-2 mr-2">Product Code</FormLabel>
                 <FormControl>
                   <Input placeholder="product code" {...field} />
                 </FormControl>
@@ -83,7 +85,7 @@ const EditProduct = () => {
             control={form.control}
             name="productName"
             render={({ field }) => (
-              <FormItem>
+              <FormItem className="flex items-center">
                 <FormLabel>Product Name</FormLabel>
                 <FormControl>
                   <Input placeholder="product name" {...field} />
@@ -97,8 +99,8 @@ const EditProduct = () => {
             control={form.control}
             name="quantity"
             render={({ field }) => (
-              <FormItem>
-                <FormLabel>Quantity</FormLabel>
+              <FormItem className="flex items-center">
+                <FormLabel className="mr-6">Quantity</FormLabel>
                 <FormControl>
                   <Input placeholder="quantity" {...field} type="number" />
                 </FormControl>
@@ -106,10 +108,12 @@ const EditProduct = () => {
               </FormItem>
             )}
           />
-          <Button type="submit">Submit</Button>
+          <div className="flex justify-start">
+            <Button type="submit">Submit</Button>
+          </div>
         </form>
       </Form>
-    </div>
+    </>
   );
 };
 
