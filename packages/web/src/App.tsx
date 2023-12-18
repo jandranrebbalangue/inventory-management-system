@@ -12,6 +12,7 @@ import Dashboard from "./pages/Dashboard";
 import { API_TOKEN } from "./constants";
 import Login from "./pages/Login";
 import EditProduct from "./products/EditProduct";
+import { Toaster } from "./components/ui/toaster";
 
 function App() {
   const routerPaths = [
@@ -63,6 +64,7 @@ function App() {
   return (
     <ThemeProvider defaultTheme="dark" storageKey="vite-ui-theme">
       <AuthProvider>
+        <Toaster />
         <RouterProvider router={router} fallbackElement={<ClipLoader />} />
       </AuthProvider>
     </ThemeProvider>
