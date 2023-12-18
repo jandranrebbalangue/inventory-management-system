@@ -30,11 +30,11 @@ export const handler = ApiHandler(async (event) => {
       productCode,
       quantity,
     };
-    const product = await createProduct(data);
+    const productId = await createProduct(data);
 
     return {
       statusCode: 200,
-      body: JSON.stringify(product),
+      body: JSON.stringify({ id: productId }),
     };
   }
 });

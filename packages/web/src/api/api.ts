@@ -1,0 +1,22 @@
+import * as z from "zod";
+import wretch from "wretch";
+import { InsertProduct } from "../../../core/src/db/schema/product";
+import { API_TOKEN } from "@/constants";
+
+const token = localStorage.getItem(API_TOKEN);
+const externalApi = wretch(import.meta.env.VITE_APP_API_URL).auth(
+  `Bearer ${token}`,
+);
+export const insertProduct = async (newProduct: InsertProduct) => {
+  const schema = z.object({
+    id: z.number(),
+  });
+
+  const product = await externalApi
+    .url("/products")
+    .json(newProduct)
+    .post()
+    .json(schema.safeParse);
+
+  return product;
+};

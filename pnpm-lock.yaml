@@ -132,6 +132,9 @@ importers:
       tailwindcss-animate:
         specifier: ^1.0.7
         version: 1.0.7(tailwindcss@3.3.6)
+      wretch:
+        specifier: ^2.7.1
+        version: 2.7.1
       zod:
         specifier: ^3.22.4
         version: 3.22.4
@@ -9251,6 +9254,11 @@ packages:
 
   /wrappy@1.0.2:
     resolution: {integrity: sha512-l4Sp/DRseor9wL6EvV2+TuQn63dMkPjZ/sp9XkghTEbV9KlPS1xUsZ3u7/IQO4wxtcFB4bgpQPRcR3QCvezPcQ==}
+
+  /wretch@2.7.1:
+    resolution: {integrity: sha512-laTmSy1T9lBaB8jwrF71S44xfoQhXxbXhpWFY3L7Yl51S62luuR69oRvDHmVVf1B62eWTcCnJVa0s4pWStuRCw==}
+    engines: {node: '>=14'}
+    dev: false
 
   /ws@3.3.3:
     resolution: {integrity: sha512-nnWLa/NwZSt4KQJu51MYlCcSQ5g7INpOrOMt4XV8j4dqTXdmlUmSHQ8/oLC069ckre0fRsgfvsKwbTdtKLCDkA==}
