@@ -51,7 +51,7 @@ const AddProduct = ({ label }: { label: string }) => {
       mutate("/products");
     } else {
       toast({
-        description: product.error.message,
+        description: "Product already exist",
       });
     }
   };
