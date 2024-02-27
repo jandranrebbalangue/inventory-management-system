@@ -1,7 +1,8 @@
 import { useRouteError } from "react-router-dom";
+import { RouteErrorType } from "./types";
 
 export const ErrorPage = () => {
-  const error = useRouteError();
+  const error = useRouteError() as RouteErrorType;
   return (
     <div id="error-page">
       <h4 className="pt-3">Oops! You&apos;re lost.</h4>
